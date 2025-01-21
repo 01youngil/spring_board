@@ -22,7 +22,7 @@ public class AuthorSaveReq {
     private String password;
 //    사용자가 String으로 입력해도 Role클래스로 자동변환
 //    ex) ADMIN, USER 등으로 입력시 Enum클래스로 변환
-    private Role role;
+    private Role role = Role.USER;
 
     public Author toEntity(){
         return Author.builder().name(this.name).email(this.email)
