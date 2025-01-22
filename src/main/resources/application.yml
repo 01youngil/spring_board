@@ -1,14 +1,5 @@
-Spring:
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/board
-    username: root
-    password: 1234
-
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MariaDBDialect
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+#spring은 실행시 무조건 application.yml파일을 찾음
+spring:
+  profiles:
+#    아래와 같이 active설정을 통해 local이라는 이름의 profiles를 가진 yml을 찾음.
+    active: prod

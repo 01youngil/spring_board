@@ -9,12 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/post")
 public class PostController {
 
@@ -23,27 +25,34 @@ public class PostController {
         this.postService = postService;
     }
 
+    @GetMapping("/create")
+    public String postCreateScreen(){
+        return "/post/post_create";
+    }
     @PostMapping("/create")
     public String postCreate(@Valid PostSaveReq postSaveReq){
         postService.save(postSaveReq);
-        return "OK";
+        return "redirect:/post/list";
     }
 
     @GetMapping("/list")
-    public List<PostListRes> postList(){
-        return postService.findAll();
+    public String postList(Model model){
+        model.addAttribute("postList",postService.findAll());
+        return "/post/post_list";
     }
 
     @GetMapping("/list/paging")
 //    페이징처리를 위한 데이터형식 : localhost:8080/post/list/paging?page=0
-    public Page<PostListRes> postListPaging
-            (@PageableDefault(size = 10, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable){
-        return postService.findAllPaging(pageable);
+    public String postListPaging
+            (Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+        model.addAttribute("postList", postService.findAllPaging(pageable));
+        return "post/post_list";
     }
 
     @GetMapping("/detail/{id}")
-    public PostDetailRes postDetailRes(@PathVariable Long id){
-        return postService.findById(id);
+    public String postDetailRes(@PathVariable Long id, Model model){
+        model.addAttribute("post", postService.findById(id));
+        return "/post/post_detail";
     }
 
     @PostMapping("/update/{id}")

@@ -6,5 +6,29 @@
 </head>
 <body>
     <div th:replace="common/header :: headerFragment"></div>
+    <div class="container">
+        <div class="page-header"><h1>글목록</h1></div>
+        <div class="float-end">
+            <a href="/post/create" class="btn btn-primary">글쓰기</a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr><th>id</th><th>title</th><th>email</th><th>상세보기</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each = "post : ${postList}">
+                <td th:text="${post.id}"></td>
+                <td th:text="${post.title}"></td>
+                <td th:text="${post.authorEmail}"></td>
+                <td><a th:href="@{/post/detail/{id}(id=${post.id})}">상세조회</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:each="pageNum : ${#numbers.sequence(0,postList.totalPages-1)}">
+                <a class="page-link" th:href="@{/post/list/paging/(page=${pageNum})}" th:text="${pageNum+1}"></a>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

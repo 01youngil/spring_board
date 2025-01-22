@@ -6,5 +6,16 @@
 </head>
 <body>
     <div th:replace="common/header :: headerFragment"></div>
+    <div class="container">
+        <div class="page-header"><h1>글상세조회</h1></div>
+        <table class="table">
+            <tr><td>id</td><td th:text="${post.id}"></td></tr>
+            <tr><td>title</td><td th:text="${post.title}"></td></tr>
+            <tr><td>contents</td><td style="white=space: pre-wrap; word-black: break-all" th:text="${post.contents}"></td></tr>
+            <tr><td>authorEmail</td><td th:text="${post.authorEmail}"></td></tr>
+            <tr><td>createdTime</td><td th:text="${post.createdTime}"></td></tr>
+            <tr><td>updatedTime</td><td th:text="${post.updatedTime}"></td></tr>
+        </table>
+    </div>
 </body>
 </html>

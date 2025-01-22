@@ -6,5 +6,27 @@
 </head>
 <body>
     <div th:replace="common/header :: headerFragment"></div>
+    <div class="container">
+        <div class="page-header"><h3>회원가입</h3></div>
+        <form action="/author/create" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                이름<input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                email<input type="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                password<input type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                사용자권한
+                <select name="role" class="form-select">
+                    <option value="ADMIN">관리자</option>
+                    <option value="USER">일반유저</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-secondary">회원가입완료</button>
+        </form>
+    </div>
 </body>
 </html>
