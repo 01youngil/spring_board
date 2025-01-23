@@ -12,6 +12,7 @@ import com.example.board.post.dtos.PostUpdateReq;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -28,6 +29,7 @@ public class Post extends BaseTimeEntity {
     @Column(length = 3000)
     private String contents;
     private String appointment;
+    private LocalDateTime appointmentTime;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
@@ -47,5 +49,9 @@ public class Post extends BaseTimeEntity {
     public void updatePost(PostUpdateReq postUpdateReq){
         this.title = postUpdateReq.getTitle();
         this.contents = postUpdateReq.getContents();
+    }
+
+    public void updateAppointment(String appointment){
+        this.appointment = appointment;
     }
 }

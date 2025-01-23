@@ -18,4 +18,7 @@ spring:
 
 logging:
   level:
-    root: debug
+    root: info
+#    별도의 에러로그 분류없이 모든 로그를 남기는 설정
+  file:
+    name: logs/app.log

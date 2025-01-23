@@ -2,4 +2,4 @@
 spring:
   profiles:
 #    아래와 같이 active설정을 통해 local이라는 이름의 profiles를 가진 yml을 찾음.
-    active: prod
+    active: local
