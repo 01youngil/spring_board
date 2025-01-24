@@ -7,6 +7,7 @@ import com.example.board.author.dtos.AuthorSaveReq;
 import com.example.board.author.dtos.AuthorUpdateReq;
 import com.example.board.author.repository.AuthorRepository;
 import com.example.board.post.repository.PostRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 public class AuthorService {
     private final AuthorRepository authorRepository;
     private final PostRepository postRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthorService(AuthorRepository authorRepository, PostRepository postRepository) {
+    public AuthorService(AuthorRepository authorRepository, PostRepository postRepository, PasswordEncoder passwordEncoder) {
         this.authorRepository = authorRepository;
         this.postRepository = postRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<AuthorListRes>findAll(){
@@ -33,7 +36,7 @@ public class AuthorService {
         if(authorRepository.findByEmail(authorSaveReq.getEmail()).isPresent()){
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
-        Author author = authorRepository.save(authorSaveReq.toEntity());
+        Author author = authorRepository.save(authorSaveReq.toEntity(passwordEncoder.encode(authorSaveReq.getPassword())));
 ////        cascade를 활용하지 않고, 별도로 post 데이터 만드는경우(아래 방법보다 선호)
 //        postRepository.save(Post.builder().title("반갑습니다").contents("처음뵙겠습니다.")
 //                        .author(author).build());

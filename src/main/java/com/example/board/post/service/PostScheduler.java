@@ -26,7 +26,7 @@ public class PostScheduler {
 //    ex) 0 0/1 * * * * : 매일 매시 1분마다
 //    ex) 0 1 * * * * : 매일 매시 1분에
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     public void postSchedule(){
         System.out.println("===예약글쓰기 스케쥴러 시작===");
         Page<Post>posts = postRepository.findAllByAppointment(Pageable.unpaged(),"Y");

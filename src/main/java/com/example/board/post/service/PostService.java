@@ -14,6 +14,8 @@ import com.example.board.post.dtos.PostUpdateReq;
 import com.example.board.post.repository.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,7 +55,10 @@ public class PostService {
     }
 
     public void save(PostSaveReq postSaveReq) throws IllegalArgumentException{
-        Author author = authorRepository.findByEmail(postSaveReq.getEmail()).orElseThrow(()-> new EntityNotFoundException("없는사용자입니다."));
+//        Author author = authorRepository.findByEmail(postSaveReq.getEmail()).orElseThrow(()-> new EntityNotFoundException("없는사용자입니다."));
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Author author = authorRepository.findByEmail(email).orElseThrow(()-> new EntityNotFoundException("없는사용자입니다."));
+
         LocalDateTime appointmentTime = null;
         if(postSaveReq.getAppointment().equals("Y")){
             if (postSaveReq.getAppointmentTime().isEmpty() || postSaveReq.getAppointmentTime()==null){

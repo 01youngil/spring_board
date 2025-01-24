@@ -15,7 +15,6 @@ public class PostDetailRes {
     private Long id;
     private String title;
     private String contents;
-    private String authorEmail;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
 

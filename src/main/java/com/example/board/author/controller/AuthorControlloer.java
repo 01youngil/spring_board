@@ -26,6 +26,12 @@ public class AuthorControlloer {
     public String authorCreateScreen(){
         return "/author/author_create";
     }
+
+    @GetMapping("/login")
+    public String authorLoginScreen(){
+        return "/author/author_login";
+    }
+
     @PostMapping("/create")
     public String authorCreate(@Valid AuthorSaveReq authorSaveReq){
         authorService.save(authorSaveReq);

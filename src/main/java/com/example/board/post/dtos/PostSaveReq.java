@@ -17,8 +17,6 @@ public class PostSaveReq {
     @NotEmpty
     private String title;
     private String contents;
-    @NotEmpty
-    private String email;
     private String appointment;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 //    private LocalDateTime appointmentTime;

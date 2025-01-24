@@ -40,7 +40,6 @@ public class Post extends BaseTimeEntity {
     }
     public PostDetailRes detailFromEntity(){
         return  PostDetailRes.builder().id(this.id).title(this.title).contents(this.contents)
-                .authorEmail(this.author.getEmail())
                 .createdTime(this.getCreatedTime())
                 .updatedTime(this.getUpdateTime())
                 .build();
